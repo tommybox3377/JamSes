@@ -53,6 +53,7 @@ sleep(1)
 # Get the last 20 songs and extracts useful information from playlist
 items = spotify.playlist_items(playlist_id, offset=total - 20)
 songs = list(get_track_info(x) for x in items["items"])
+songs = sorted(songs, key=lambda x: x['dt_added'])
 
 # iterates over users to figure out who has not added a songs for the longest time
 songs_rev_who = [x["who"] for x in songs[::-1]]
